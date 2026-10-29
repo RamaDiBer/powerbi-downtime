@@ -1,0 +1,20 @@
+model Model
+	culture: es-ES
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: es-AR
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["Downtime"]
+
+ref table Downtime
+ref table DateTableTemplate_95041776-4b35-4d16-8c92-c777c8e272ed
+ref table LocalDateTable_d8b27c5d-7cd5-465b-9feb-71b3965ce6bb
+ref table LocalDateTable_d5cfc973-b265-48df-be81-091045a4cd74
+ref table TablaMeses
+
+ref cultureInfo es-ES
+

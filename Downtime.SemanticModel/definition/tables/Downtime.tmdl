@@ -1,0 +1,325 @@
+table Downtime
+	lineageTag: 04d43c88-b6c5-4255-8ef3-52986a9beeec
+
+	measure 'Total Downtime  (min)' =
+			
+			SUM(Downtime[Downtime])
+		formatString: 0.00
+		lineageTag: cd9aa4d7-7b69-46c7-8c34-d4006440b7f9
+		dataCategory: Uncategorized
+
+	measure 'Total Downtime (hs)' =
+			
+			DIVIDE([Total Downtime  (min)], 60)
+		lineageTag: c61ee59c-ddab-4b85-bae8-f53ce93e0bb6
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Downtime por Sitio' =
+			
+			SUM(Downtime[Downtime (min)])
+		lineageTag: 2f720732-bf00-44e9-bbd2-af8876231690
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Downtime por Tecnico' =
+			
+			SUM(Downtime[Downtime (min)])
+		lineageTag: 3fb2d44b-f9f4-4565-8b38-3fab7dc7d1ad
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Cantidad Incidentes' =
+			
+			COUNT(Downtime[Fecha])
+		formatString: 0
+		lineageTag: 983096dc-a7d3-477d-97ef-5b4a9acedbea
+
+	measure '% Downtime' =
+			
+			DIVIDE([Total Downtime  (min)],1440)
+		lineageTag: bafdb4d5-d5c7-4b2f-ac42-09121a5fd127
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Downtime Mes Anterior' =
+			
+			CALCULATE(
+			    [Total Downtime (hs)],
+			    PREVIOUSMONTH(Downtime[Fecha])
+			)
+		lineageTag: ed4c211c-0ccd-4c2e-bbe0-9e8cb3f8dad0
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Downtime (hs) Visual' =
+			
+			IF(ISBLANK([Total Downtime (hs)]), 0, [Total Downtime (hs)])
+		lineageTag: 6551b709-718b-45d0-b61a-6d518eaf4fc5
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Downtime (min) Visual' =
+			
+			IF(ISBLANK([Total Downtime  (min)]), 0, [Total Downtime  (min)])
+		lineageTag: cf8b00a7-08a7-4b9f-b98b-cf1645d46c34
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Downtime (Min)' =
+			
+			FORMAT(
+			    [Total Downtime  (min)],
+			    "#,##0"
+			)
+		lineageTag: 3c775c21-4faa-47cf-bc8b-8255a10ab039
+
+	column Fecha
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 67143c32-385d-4841-a904-9b9f70ee63b0
+		summarizeBy: none
+		sourceColumn: Fecha
+
+		variation Variación
+			isDefault
+			relationship: 93e5728b-cfc2-4faa-93c6-cfc77526c061
+			defaultHierarchy: LocalDateTable_d8b27c5d-7cd5-465b-9feb-71b3965ce6bb.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Week
+		dataType: int64
+		formatString: 0
+		lineageTag: c0f4ecd6-ad7f-4327-afa8-c49aab497513
+		summarizeBy: sum
+		sourceColumn: Week
+
+		annotation SummarizationSetBy = Automatic
+
+	column Detalle
+		dataType: string
+		lineageTag: 3f3984c4-2bf0-4406-9c94-2b666b59fa03
+		summarizeBy: none
+		sourceColumn: Detalle
+
+		annotation SummarizationSetBy = Automatic
+
+	column Comentario
+		dataType: string
+		lineageTag: 04f4a685-e417-43d7-a739-b2f2763c7fb1
+		summarizeBy: none
+		sourceColumn: Comentario
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Downtime PP'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: fc77765e-5b44-4047-9b7c-8aa3b7e34aba
+		summarizeBy: sum
+		sourceColumn: Downtime PP
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Motivo
+		dataType: string
+		lineageTag: 77df7cd6-61b4-48c1-883a-9e6e5385dee1
+		summarizeBy: none
+		sourceColumn: Motivo
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sitio
+		dataType: string
+		lineageTag: bc98cb43-ef61-4e45-a365-10ea3e1a5506
+		summarizeBy: none
+		sourceColumn: Sitio
+
+		annotation SummarizationSetBy = Automatic
+
+	column Turno
+		dataType: string
+		lineageTag: f20bdf66-b942-46b6-9187-d240885fa103
+		summarizeBy: none
+		sourceColumn: Turno
+
+		annotation SummarizationSetBy = Automatic
+
+	column Tecnico
+		dataType: string
+		lineageTag: 61c90fdc-c63e-4c03-aaab-6150563d7dc9
+		summarizeBy: none
+		sourceColumn: Tecnico
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Unidad de Negocio'
+		dataType: string
+		lineageTag: f33b539c-7093-4793-a343-34f5d752aee6
+		summarizeBy: none
+		sourceColumn: Unidad de Negocio
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Downtime HS'
+		dataType: dateTime
+		isHidden
+		formatString: General Date
+		lineageTag: 0f632c59-3d64-436c-9ffb-afba957419b9
+		summarizeBy: none
+		sourceColumn: Downtime HS
+
+		variation Variación
+			isDefault
+			relationship: c7f2e046-f13a-4b93-b74a-b03c04f7b4c2
+			defaultHierarchy: LocalDateTable_d5cfc973-b265-48df-be81-091045a4cd74.'Jerarquía de fechas'
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ticket
+		dataType: string
+		lineageTag: a33a937b-45b7-40eb-97a9-2db41db25c31
+		summarizeBy: none
+		sourceColumn: Ticket
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Downtime HS (min)'
+		dataType: double
+		lineageTag: 47858e8e-2d6f-46fc-8256-8844b650495c
+		summarizeBy: sum
+		sourceColumn: Downtime HS (min)
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Downtime PP (min)'
+		dataType: double
+		lineageTag: 23484c24-d77f-45ed-ad84-454721234b8b
+		summarizeBy: sum
+		sourceColumn: Downtime PP (min)
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Downtime (min)'
+		dataType: double
+		lineageTag: 588e6592-11d3-4e3a-b701-a7a4791534ec
+		summarizeBy: sum
+		sourceColumn: Downtime (min)
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Downtime Promedio' =
+			
+			AVERAGE(Downtime[Downtime (min)])
+		lineageTag: 5e63f3da-9254-4937-8bb9-a4068f891c1d
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Mes = ```
+			FORMAT(Downtime[Fecha], "MMMM")
+			
+			```
+		lineageTag: 5e8381d6-e9f3-4fdb-a5f6-c472eea007fb
+		summarizeBy: none
+		sortByColumn: MesNumero
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column MesNumero = MONTH(Downtime[Fecha])
+		formatString: 0
+		lineageTag: 2b2d2670-723a-41aa-868b-357af3922ff1
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Año = ```
+			YEAR(Downtime[Fecha])
+			
+			```
+		formatString: 0
+		lineageTag: 7b0bdf53-2c24-4552-b965-c49b7e5e4e4c
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column Downtime
+		dataType: int64
+		formatString: 0
+		lineageTag: 9424979e-b197-4729-8070-5f8f3e1ce213
+		summarizeBy: sum
+		sourceColumn: Downtime
+
+		annotation SummarizationSetBy = Automatic
+
+	column Columna1
+		dataType: string
+		lineageTag: 8c30c534-1fc3-40bf-8b1e-788eb4f2b72e
+		summarizeBy: none
+		sourceColumn: Columna1
+
+		annotation SummarizationSetBy = Automatic
+
+	column Columna2
+		dataType: string
+		lineageTag: c7c6a580-1a6e-47ff-8619-615eed551827
+		summarizeBy: none
+		sourceColumn: Columna2
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Downtime = m
+		mode: import
+		source = ```
+				let
+				  Origen = SharePoint.Files("https://mirgor.sharepoint.com/sites/Soporte-adm", [ApiVersion = 15]),
+				    #"Filas filtradas" = Table.SelectRows(Origen, each ([Extension] = ".xlsx") and ([Name] = "Downtime no manufactura.xlsx")),
+				    #"Downtime no manufactura xlsx_https://mirgor sharepoint com/sites/Soporte-adm/Shared Documents/Soporte plantas continente/5 - General plantas/2- Downtime/" = #"Filas filtradas"{[Name="Downtime no manufactura.xlsx",#"Folder Path"="https://mirgor.sharepoint.com/sites/Soporte-adm/Shared Documents/Soporte plantas continente/5 - General plantas/2- Downtime/"]}[Content],
+				    #"Libro de Excel importado" = Excel.Workbook(#"Downtime no manufactura xlsx_https://mirgor sharepoint com/sites/Soporte-adm/Shared Documents/Soporte plantas continente/5 - General plantas/2- Downtime/"),
+				    Downtime_Sheet = #"Libro de Excel importado"{[Item="Downtime",Kind="Sheet"]}[Data],
+				    #"Encabezados promovidos" = Table.PromoteHeaders(Downtime_Sheet, [PromoteAllScalars=true]),
+				    #"Tipo cambiado" = Table.TransformColumnTypes(#"Encabezados promovidos",{{"Fecha", type date}, {"Week", Int64.Type}, {"Detalle", type text}, {"Comentario", type text}, {"Downtime PP", type datetime}, {"Downtime", type datetime}, {"Motivo", type text}, {"Sitio", type text}, {"Turno", type text}, {"Tecnico", type text}, {"Unidad de Negocio", type text}, {"Downtime HS", type datetime}, {"Ticket", type text}}),
+				    #"Filas en blanco eliminadas" = Table.SelectRows(#"Tipo cambiado", each not List.IsEmpty(List.RemoveMatchingItems(Record.FieldValues(_), {"", null}))),
+				    #"Personalizada agregada" = Table.AddColumn(#"Filas en blanco eliminadas", "Personalizado", each if [Downtime HS] = null
+				then null 
+				else Time.Hour(Time.From([Downtime HS])) * 60 + Time.Minute(Time.From([Downtime HS]))),
+				    #"Columnas con nombre cambiado" = Table.RenameColumns(#"Personalizada agregada",{{"Personalizado", "DowntimeHS"}}),
+				    #"Personalizada agregada1" = Table.AddColumn(#"Columnas con nombre cambiado", "Personalizado", each if [Downtime PP] = null
+				then null 
+				else Time.Hour(Time.From([Downtime PP])) * 60 + Time.Minute(Time.From([Downtime PP]))),
+				    #"Columnas con nombre cambiado1" = Table.RenameColumns(#"Personalizada agregada1",{{"Personalizado", "DowntimePP"}}),
+				    #"Personalizada agregada2" = Table.AddColumn(#"Columnas con nombre cambiado1", "Personalizado", each if [Downtime] = null
+				then null 
+				else Time.Hour(Time.From([Downtime])) * 60 + Time.Minute(Time.From([Downtime]))),
+				    #"Tipo cambiado1" = Table.TransformColumnTypes(#"Personalizada agregada2",{{"Personalizado", type number}}),
+				    #"Columnas con nombre cambiado2" = Table.RenameColumns(#"Tipo cambiado1",{{"Personalizado", "Downtime (min)"}, {"DowntimePP", "Downtime PP (min)"}, {"DowntimeHS", "Downtime HS (min)"}}),
+				    #"Tipo cambiado2" = Table.TransformColumnTypes(#"Columnas con nombre cambiado2",{{"Downtime PP (min)", type number}, {"Downtime HS (min)", type number}}),
+				    #"Columnas reordenadas" = Table.ReorderColumns(#"Tipo cambiado2",{"Fecha", "Week", "Detalle", "Comentario", "Downtime PP", "Downtime", "Motivo", "Sitio", "Turno", "Tecnico", "Unidad de Negocio", "Downtime HS", "Ticket", "Downtime PP (min)", "Downtime (min)", "Downtime HS (min)"}),
+				    #"Filas filtradas1" = Table.SelectRows(#"Columnas reordenadas", each ([Week] <> 0)),
+				    #"Tipo cambiado3" = Table.TransformColumnTypes(#"Filas filtradas1",{{"Downtime", Int64.Type}, {"Downtime PP", Int64.Type}})
+				in
+				    #"Tipo cambiado3"
+				```
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
+
