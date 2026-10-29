@@ -1,0 +1,11 @@
+{
+    "$schema":  "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+    "metadata":  {
+                     "type":  "SemanticModel",
+                     "displayName":  "Downtime"
+                 },
+    "config":  {
+                   "version":  "2.0",
+                   "logicalId":  "bda34e2e-dcd6-4dd6-a4b7-0be6c3baa54c"
+               }
+}

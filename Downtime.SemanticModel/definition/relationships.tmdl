@@ -1,0 +1,14 @@
+relationship 93e5728b-cfc2-4faa-93c6-cfc77526c061
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Downtime.Fecha
+	toColumn: LocalDateTable_d8b27c5d-7cd5-465b-9feb-71b3965ce6bb.Date
+
+relationship c7f2e046-f13a-4b93-b74a-b03c04f7b4c2
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Downtime.'Downtime HS'
+	toColumn: LocalDateTable_d5cfc973-b265-48df-be81-091045a4cd74.Date
+
+relationship da4a149a-c462-7c49-fc26-39bb515c8151
+	fromColumn: Downtime.MesNumero
+	toColumn: TablaMeses.MesNumero
+

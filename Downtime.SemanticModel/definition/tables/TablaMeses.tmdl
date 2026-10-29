@@ -1,0 +1,46 @@
+table TablaMeses
+	lineageTag: 53115ed4-36c1-4845-901b-25e159c9e145
+
+	column Mes
+		lineageTag: 1cc948e0-2525-4429-abf7-5d2378380710
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Mes]
+		sortByColumn: MesNumero
+
+		annotation SummarizationSetBy = Automatic
+
+	column MesNumero
+		formatString: 0
+		lineageTag: bf5a03a6-1c98-4a04-8eec-33d97c4967a2
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [MesNumero]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition TablaMeses = calculated
+		mode: import
+		source =
+				
+				DATATABLE(
+				    "Mes", STRING,
+				    "MesNumero", INTEGER,
+				    {
+				        {"Enero", 1},
+				        {"Febrero", 2},
+				        {"Marzo", 3},
+				        {"Abril", 4},
+				        {"Mayo", 5},
+				        {"Junio", 6},
+				        {"Julio", 7},
+				        {"Agosto", 8},
+				        {"Septiembre", 9},
+				        {"Octubre", 10},
+				        {"Noviembre", 11},
+				        {"Diciembre", 12}
+				    }
+				)
+
+	annotation PBI_Id = e707883224b149bbab954a1863d8bb10
+
